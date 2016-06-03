@@ -75,7 +75,8 @@ PRODUCT_COPY_FILES += \
     device/qcom/msm8994/audio_platform_info_i2s.xml:system/etc/audio_platform_info_i2s.xml \
     device/qcom/msm8994/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
     device/qcom/msm8994/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
-    device/qcom/msm8994/audio_platform_info.xml:system/etc/audio_platform_info.xml
+    device/qcom/msm8994/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    device/qcom/msm8994/tfa98xx.cnt:system/etc/firmware/tfa98xx.cnt
 
 # Listen configuration file
 PRODUCT_COPY_FILES += \
@@ -128,6 +129,18 @@ PRODUCT_PACKAGES += \
     libantradio \
     antradio_app
 
+#add fingerprint
+#-include vendor/oneplus/fingerprint/prebuilt/generate_common.mk
+
+PRODUCT_PACKAGES += fingerprintd
+PRODUCT_PACKAGES += lib_fpc_tac_shared
+PRODUCT_PACKAGES += fingerprint.msm8994
+PRODUCT_PACKAGES += fpc_fingerprint_hal-test
+PRODUCT_PACKAGES += FingerprintServiceExtension
+PRODUCT_PACKAGES += libcom_fingerprints_service
+#PRODUCT_PACKAGES += ImageCollectionTool
+#PRODUCT_PACKAGES += SensorTestTool
+
 PRODUCT_SUPPORTS_VERITY := true
 PRODUCT_AAPT_CONFIG += xlarge large
 
@@ -138,3 +151,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low latency audio buffer size in frames
 PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192
+
+$(call inherit-product-if-exists, device/qcom/msm8994/device-vendor.mk)

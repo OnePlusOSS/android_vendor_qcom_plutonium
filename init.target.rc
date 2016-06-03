@@ -127,6 +127,13 @@ service perfd /system/vendor/bin/perfd
 #   user root
 #   disabled
 #
+
+#fingerprint service
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system
+
 service per_mgr /system/bin/pm-service
     class core
     user system
@@ -271,16 +278,16 @@ service ppd /system/bin/mm-pp-daemon
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
-service ml_daemon /system/bin/ml_daemon
-    class core
-    user root
-    group root
+#service ml_daemon /system/bin/ml_daemon
+#    class core
+#    user root
+#    group root
 
-service seald /system/bin/seald
-    class late_start
-    user root
-    group system
-    oneshot
+#service seald /system/bin/seald
+#    class late_start
+#    user root
+#    group system
+#    oneshot
 
 service energy-awareness /system/bin/energy-awareness
     class main
